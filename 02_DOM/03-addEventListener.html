@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AddEventListener</title>
+    <style>
+        div {
+            width:100px;
+            height: 100px;
+            position: relative;
+        }
+        .rose{
+            background: pink;
+            border-radius: 
+        }
+    </style>
+</head>
+<body>
+    <button id="bouton"> Dépalcer le carré</button>
+    <div class="rose"></div>
+    
+    <script>
+        var carre = document.querySelector('.rose');
+        var bouton = document.querySelector('#bouton');
+        var leftPosition = 0; //valeur de la position left du carée
+
+        function deplacement(){
+            leftPosition += 10; // augmente la valeur de la variable de +10
+            carre.style.left =leftPosition + 'px';
+        }
+
+        function couleur(){
+            carre.style.backgroundColor = 'yellow'; // les propriétés
+        }
+
+        //bouton.onclick = deplacement;
+        
+        //bouton.onclick = couleur;
+
+        //Pour s'en sortir on utilise addEventListener ( combiner les deux function):
+        
+        bouton.addEventListener('click', deplacement);
+        bouton.addEventListener('click', couleur); //l'événement click s'écrit sans le "on", et la fonction coueleur eqt appelée une fonction CALLBACK car elle est passée en argument (= en paramètre) d'une autre fonction, ici dans addEventListener(). En effet, elle attend l'ordre de cette dernière pour s'éxecuter.
+
+        // addEventListener() veut dire littéralement "ajouter un écouteur d'événements". Cela signifie que l'on ajoute un événement à un élément (ici au bouton).
+
+        // Cette méthode est utile aussi si vous utilisez des plugins ou des bibliothèques JS qui font appel à des événements identiques aux vôtres
+
+        //-------------
+        //on peut aussi écrire une fonction anonyme directement dans AddEventListener:
+        bouton.addEventListener('click', function(){
+            carre.style.borderRadius = '50px';
+        });
+        bouton.addEventListener('click', function(){
+            carre.style.border = '2px solid red';
+        });
+        
+
+
+
+
+    </script>
+</body>
+</html>
