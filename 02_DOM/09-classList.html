@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+   <style>
+       p{ cursor: pointer; }
+       .red{ color: red;}
+       .blue{ background: cyan; width: 300px;}
+   </style>
+</head>
+<body>
+    <p id="survol">Ce texte va changer de couleur de survol</p>
+    <button id="toggleBlue"> Changer background du texte</button>
+
+    <!-- exercice -->
+    <p class="texte">Je suis un paragraphe</p>
+    <p class="texte">Je suis un paragraphe</p>
+    <p class="texte">Je suis un paragraphe</p>
+    <p class="texte">Je suis un paragraphe</p>
+
+    <script>
+       //classList, et ses methodes : add(), remove() et toggle() :
+
+       // classList retourne la liste des classes CSS de l'élément selectionné. Grâce aux methodes que possède classList, on peut : ajouter une classe avec add(), retirer une classe avec remove() ou alterner l'ajout/suppression d'une classe avec toggle().
+
+       var element = document.querySelector('#survol');
+
+       //En survolant le paragraphe #survol, on lui ajoute une classe "red" :
+       element.addEventListener('mouseover', function(){
+           this.classList.add('red'); //classList possède la métode add() qui permet d'ajouter une classe à l'élément.
+       });
+       
+       //
+       element.addEventListener('mouseout', function(){
+           this.classList.remove('red'); // à l'inverse  la métode remove()  permet d'enlever une classe à l'élément.
+       });
+
+       //Ajouter ou retirer une classe alternativement à l'élément au clic sur le boutton :
+       document.querySelector('#toggleBlue').addEventListener('click', function(){
+           element.classList.toggle('blue'); // la méthode toggle permet d'ajouter ou de retirer une classe à l'élément
+       });
+
+       //exercice
+       var paragraph = document.querySelectorAll('.texte');
+       for ( var i = 0; i < paragraph.length; i++) {
+            paragraph[i].addEventListener('click', function(){
+           this.classList.toggle('red'); 
+       });
+       }
+       
+      
+       
+       /* var inputs = document.querySelectorAll('.focus');
+
+       for ( var i = 0; i < inputs.length; i++) {
+           inputs[i].addEventListener('focus', function(){
+               this.style.border = '2px solid red';
+           });
+           inputs[i].addEventListener('blur', function(){
+               this.style.border = '';
+           });
+
+       } */
+
+       
+    </script>
+</body>
+</html>

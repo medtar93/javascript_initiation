@@ -12,40 +12,28 @@
 <body>
    <form action="" method="">
        <label for="">Pseudo</label>
-       <input type="text" name="pseudo" id="pseudo" >
-        <hr>
-
-
-
-
-
-        
-       <br>
+       <input type="text" name="pseudo" id="pseudo" class="focus" >
+     
        <label for="">Mot de passe</label>
-       <input type="password" name="mdp"  id="mdp" >
+       <input type="password" name="mdp"  id="mdp" class="focus">
        <br>
        <input type="submit"  value="se connecter" >
    </form>
     <script>
         //Exercice : Lorsque vous êtes en focus (= evenement "focus") sur un input, sa bordure devient rouge. Puis lorsque vous êtes en blur (= événement blur)sur un input, sa bordure redvient normale. Utilisez addEvenListerner.
 
-        var bordure = document.querySelector('#pseudo');
-        var bordureB = document.querySelector('#mdp');
-    //input pseudo:
-        function changeBordure (){
-            bordure.style.border = '2px solid red';
-        }
-        bordure.addEventListener('focus', function(){
-            setTimeout(changeBordure, 10);
-        });
-    //input mot de passe
-        function changeBordureB (){
-            bordure.style.border = '2px solid red';
-        }
-        bordureB.addEventListener('focus', function(){
-            setTimeout(changeBordureB, 10);
-        });
-       
+      
+       var inputs = document.querySelectorAll('.focus');
+
+       for ( var i = 0; i < inputs.length; i++) {
+           inputs[i].addEventListener('focus', function(){
+               this.style.border = '2px solid red';
+           });
+           inputs[i].addEventListener('blur', function(){
+               this.style.border = '';
+           });
+
+       }
 
     </script>
 </body>
