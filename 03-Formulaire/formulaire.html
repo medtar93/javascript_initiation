@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>formulaire</title>
+    <style>
+    .red {border: 2px solid red;}
+    .green {border: 2px solid green;}
+    </style>
+</head>
+<body>
+    
+    <div id="message"></div>
+
+    <form method="" action="">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+        <br>
+
+        <label for="mdp">mot de passe</label>
+        <input type="password" id="mdp" name="mdp">
+        <br>
+
+        <input type="submit" value="s'incrire">
+
+    </form>
+
+    <script>
+    var champEmail = document.getElementById('email');
+    var champMdp = document.getElementById('mdp');
+
+    // 1- on verifie tous les champs quand on clique sur "s'incrire":
+    document.querySelector('form').addEventListener('submit', function (event) { // submit se déclanche quand on soumet un formulaire avec l'input type "submit"
+        
+        //l'objet event dans les parentheses de notre fonction sert à fournir des informations sur l'événement actuellement déclanché. Par exemple vous pourvez récupérer les touches enfoncées, les cordonnées du curseur, ou bloquer un événement tel que l'envoi (= submit) du formulaire. Ce paramètre s'écrit "e" ou "event" par convention.
+
+        var erreur = false; //pour dire qu'il n'y a pas d'erreur au début. On mettra cette variable à true dès qu'une erreur sera produite sur le formulaire.
+
+        //on verifie le champ email :
+
+        if(champEmail.value.indexOf('@') ==  -1){
+            // la propriété value permet d'acceder à la valeur saisie par l'internaute dans l'input champEmail. //indexOF('@') retourne la position de l'@ dans cette valeur. s'il n'y est pas, cette méthode retourne -1.
+            champEmail.classList.add('red');
+
+        }else {
+            champEmail.classList.add('green');
+        } 
+    
+        //on verifie la longeur du champ mdp :
+        if(champMdp.value.trim().length < 4 || champMdp.value > 25 ) {
+            //si la longeur de la valeur du champ mdp est inférieur à 4 ou supérieur à 25 :
+            champMdp.classList.add('red');
+            erreur = true;
+        } else {
+            champMdp.classList.add('green');
+        }
+
+        //Enfin, s'il y a une erreur (erreur vaut true), on bloque le formulaire et on et un message à l'internaute :
+        if (erreur === true) {
+        //on bloque le submit:
+        event.preventDefault(); // bloque l'envoie du formulaire
+        //Cette methode permet de bloquer l'action par défaut d'un événement : bloquer un lien, l'envoi d'un formulaire, la coche d'une checkbox, etc.
+
+        document.querySelector('#message').textContent = 'Veuillez vérifier vos saisies !';
+
+        }
+    } ); // fin du submit
+
+    //2- On reinitialise les champs des qu'il change de valeur:
+
+    champEmail.addEventListener('change', function() {
+    //l'événement change se déclenche quand on modifie la valeur d'un input
+        this.classList.remove('red', 'green'); //on retire toutes les classes pour mettre une bordure par défaut
+    });
+    champMdp.addEventListener('change', function() {
+        this.classList.remove('red', 'green'); //on retire toutes les classes pour mettre une bordure par défaut
+    });
+    </script>
+</body>
+</html>
