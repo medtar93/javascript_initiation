@@ -22,6 +22,8 @@ EXERCICE :
 <html>
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <title>Formulaire</title>
   <style>
@@ -147,7 +149,7 @@ EXERCICE :
           <button type="submit"> Commander</button>
         </div>
       </form>
-      <img src="" alt="" width="400px" height="264px">
+      <img src="" alt="" class="vignette">
 
 
     </section>
@@ -160,13 +162,15 @@ $(function() { // début ready
   // formulaire 
   var monChoix = $('input');
   var monAdresse = $('textarea');
+
+  // validation de la commande : on vérifie les 2 champs
   $('form').submit(function(event){
-    var erreur = false;
-    event.preventDefault();
-    if(monChoix.val().length > 0){
-    monChoix.addClass('green');
+    var erreur = false; // car pas d'erreur au début 
+    
+    if(monChoix.val().length > 0){ // si la longeur de la valeur du champs est strictement supereieur à 0
+    monChoix.addClass('green'); // donc pas d'erreur , alors on applique .green pour obtenir une bordure verte.
       }else{
-    erreur = true;
+    erreur = true;// si le if est faux alors on applique .red pour obtenir une bordure rouge.
     monChoix.addClass('red');
   }
   if(monAdresse.val().length > 0){
@@ -175,30 +179,33 @@ $(function() { // début ready
         erreur = true;
     monAdresse.addClass('red');
   }
-  if (erreur === false){
-    $('form').html('votre demande a été traité avec succés !');
+  // S'il y a erreur, on bloque le formulaire, sinon on met le message de réussite:
+  if (erreur == true ) {
+    event.preventDefault();
+  }else{
+    $('#formulaire').html('votre demande a été traité avec succés ! <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>');
+    $('#formulaire').addClass('succes');
   }
-  });
+  }); // fin du submit
   //Pour reinitialiser une fois le champ manquant remplie
   monChoix.change(function(){
-    $(this).removeClass('red', 'green');
+    $(this).removeClass('red green');
 
   }); 
   monAdresse.change(function(){
-    $(this).removeClass('red', 'green');
+    $(this).removeClass('red green');
 
-  });  
+  });  //fin réeinitialisation 
   // afficher l'image 
   
   var images = $('#portfolio img');
 
  images.click(function(){
         var monSrc = $(this).attr('src');
-        var numero = $(this).next().html().substring(1);
+        var numero = $(this).next().html().substring(1); //substring(1) permet de couper la chaine de caractère et de la sélectionner à partir de la position indice 1 donc la la deuxième position.
         console.log(numero);
-        $('#choix').change().val(numero);
+        $('#choix').val(numero);
      $('#formulaire img').attr('src', monSrc);
-     $('#formulaire img').css({marginLeft: '150px', marginTop: '20px'});
     });
  
 
